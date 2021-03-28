@@ -15,21 +15,21 @@ int main() {
 	ofstream outFile2("testimg16bit.bmp", ios::binary);
 	ofstream outFile3("testimg24bit.bmp", ios::binary);
 	BmpImage image;
-	cout << sizeof(DWORD);
 	if (!file) {
 		return 0;
 	}
 	image.loadImage(file);
 	file.close();
-	//image.saveImage(outFile);
 	BmpImage image2 = image.image24_to_16();
 	image2.saveImage(outFile2);
-
+	outFile2.close();
 	ifstream file3("testimg16bit.bmp", ios::binary);
 	BmpImage image16bit;
 	image16bit.loadImage(file3);
+	file3.close();
 	BmpImage image24bit = image16bit.image16_to_24();
 	image24bit.saveImage(outFile3);
+	outFile3.close();
 	return 0;
 }
 
